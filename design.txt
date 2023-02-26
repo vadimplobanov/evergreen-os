@@ -1,0 +1,17 @@
+Core principles: security & efficiency
+--------------------------------------
+
+- No OS components in containers, flatpaks, snaps, or A/B partitions
+- Online updates, except for core OS components
+- Access to different /home subdirectories and other capabilities is controlled for all apps
+- Entire boot is measured & trusted
+
+Boot partitions
+---------------
+
+Only have one boot partition - the ESP or the traditional one - unless the ESP is too small.
+Use XBOOTLDR type for the latter.
+Mount each partition only when necessary: on explicit request or when updating its contents.
+For any partition using vFAT: write file, syncfs(), rename file, syncfs().
+For any partition using vFAT: fsck on mount.
+Both partitions need to be mounted at the top (/) level.
